@@ -1,30 +1,34 @@
+<?php
+// Read user data from CSV file
+$file = fopen('./uploads/users.csv', 'r');
+$data = array();
+while (($row = fgetcsv($file)) !== false) {
+	$data[] = $row;
+}
+fclose($file);
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Users</title>
+    <title>User List</title>
 </head>
 
 <body>
-    <h2>Registered Users</h2>
-    <table border="1">
+    <table>
         <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Profile Picture</th>
         </tr>
-        <?php
-		// Read user data from CSV file and display in table
-		$file = fopen('users.csv', 'r');
-		while (($data = fgetcsv($file)) !== false) {
-		    echo "<tr>";
-		    foreach ($data as $value) {
-		        echo "<td>" . $value . "</td>";
-		    }
-		    echo "</tr>";
-		}
-		fclose($file);
-		?>
+        <?php foreach($data as $row): ?>
+        <tr>
+            <td><?= $row[0] ?></td>
+            <td><?= $row[1] ?></td>
+            <td><img src="<?= $row[2] ?>" width="100px"></td>
+        </tr>
+        <?php endforeach; ?>
     </table>
 </body>
 

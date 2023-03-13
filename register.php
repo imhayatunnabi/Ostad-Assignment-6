@@ -56,7 +56,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	// Save user data to CSV file
 	$data = array($name, $email, $target_file);
-	$file = fopen('users.csv', 'a');
+	$file = fopen('./uploads/users.csv', 'a');
 	if(fputcsv($file, $data) === false) {
 		echo "Error writing to file.";
 		exit;
