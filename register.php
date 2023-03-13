@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	// Handle file upload
-	$target_dir = "./uploads/";
+	$target_dir = "uploads/";
 	$target_file = $target_dir . uniqid() . basename($_FILES["profile_picture"]["name"]);
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
@@ -57,7 +57,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// Save user data to CSV file
 	$data = array($name, $email, $target_file);
 	$file = fopen('users.csv', 'a');
-	fputcsv($file, $data);
+	if(fputcsv($file, $data) === false) {
+		echo "Error writing to file.";
+		exit;
+	}
 	fclose($file);
 
 	// Set session and cookie
