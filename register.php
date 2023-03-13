@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	// Handle file upload
-	$target_dir = "uploads/";
+	$target_dir = "./uploads/";
 	$target_file = $target_dir . uniqid() . basename($_FILES["profile_picture"]["name"]);
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
